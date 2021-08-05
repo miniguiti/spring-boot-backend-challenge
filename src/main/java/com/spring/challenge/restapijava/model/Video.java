@@ -1,27 +1,30 @@
 package com.spring.challenge.restapijava.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Video {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    private Categoria categoria;
+
     private String titulo;
     private String descricao;
     private String url;
 
-    public Video(String titulo, String descricao, String url) {
+    public Video(String titulo, String descricao, String url, Categoria categoria) {
+        this.categoria = categoria;
         this.titulo = titulo;
         this.descricao = descricao;
         this.url = url;
     }
 
-    public Video(Long id, String titulo, String descricao, String url) {
+    public Video(Long id, Categoria categoria, String titulo, String descricao, String url) {
         this.id = id;
+        this.categoria = categoria;
         this.titulo = titulo;
         this.descricao = descricao;
         this.url = url;
@@ -60,5 +63,13 @@ public class Video {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 }
