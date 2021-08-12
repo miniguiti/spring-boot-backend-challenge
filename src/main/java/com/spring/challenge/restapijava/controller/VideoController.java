@@ -19,7 +19,9 @@ import org.springframework.web.util.UriComponentsBuilder;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/videos")
@@ -32,12 +34,12 @@ public class VideoController {
 
     @GetMapping
     public Page<VideoDto> listar(@RequestParam(required = false) String nomeVideo,
-            @PageableDefault(sort = "id", direction = Sort.Direction.ASC, page = 0, size = 10) Pageable pageable) {
-        if(nomeVideo == null){
+                                 @PageableDefault(sort = "id", direction = Sort.Direction.ASC, page = 0, size = 10) Pageable pageable) {
+        if (nomeVideo == null) {
             Page<Video> videos = videoRepository.findAll(pageable);
             return VideoDto.converter(videos);
-        }else{
-            Page<Video> videos = videoRepository.findByTitulo(nomeVideo,pageable);
+        } else {
+            Page<Video> videos = videoRepository.findByTitulo(nomeVideo, pageable);
             return VideoDto.converter(videos);
         }
     }
@@ -49,6 +51,12 @@ public class VideoController {
             return ResponseEntity.ok(new DetalhesVideoDto(video.get()));
         }
         return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/free")
+    public Page<VideoDto> buscarVideosFree(@PageableDefault(sort = "id", direction = Sort.Direction.ASC, page = 0, size = 10) Pageable pageable) {
+        Page<Video> videos = videoRepository.findByIdLessThan(3L, pageable);
+        return VideoDto.converter(videos);
     }
 
     @PostMapping
