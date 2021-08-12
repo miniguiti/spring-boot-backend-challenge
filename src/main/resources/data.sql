@@ -1,3 +1,5 @@
+INSERT INTO USUARIO(nome, email, senha) VALUES('Giuliana', 'giu@email.com', '$2a$10$TwsfK8sCwsWC1DfK76dHDOM8/4MPwIYCr4MM3.ptFajpLQc.IfroG');
+
 INSERT INTO CATEGORIA(titulo, cor) VALUES('Titulo Categoria 01', 'Azul');
 INSERT INTO CATEGORIA(titulo, cor) VALUES('Titulo Categoria 02', 'Amarelo');
 INSERT INTO CATEGORIA(titulo, cor) VALUES('Titulo Categoria 03', 'Branco');
