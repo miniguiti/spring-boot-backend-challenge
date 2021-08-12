@@ -1,4 +1,4 @@
-package com.spring.challenge.restapijava.config;
+package com.spring.challenge.restapijava.config.validacao;
 
 public class ErroDeFormularioDto {
     public String campo;
